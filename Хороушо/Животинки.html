@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Anton (C)">
+	<meta name="description" content="Web Programming and Design">
+	<meta name="keywords" content="web, html, css, javascript">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JS Test</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" type="text/css" href="">
+	<script type="text/javascript" src=""></script>
+	<style>
+		/*  Saglabājiet jebkuras konteinera noteikto platumu un augstumu, 
+			izlaižot papildu izmērus apmalēm un polsterējumam   */
+		* {box-sizing: border-box;}
+		
+		/*  BODY tagu vispārīgais stils  */
+		body {
+			margin: 30px;
+			padding: 0;
+			font: 18px sans-serif;
+			background-image: url("images/javascript.png");
+			background-position: calc(55% + 100px) 30px;
+			background-repeat: no-repeat;
+			background-color: #fff;
+		}
+		
+		/*  Hipersaites  */
+		a {color: #2891f5; text-decoration: none;}
+		a:hover, a:focus {color: #b30000; text-decoration: none;}
+		
+		/*   Virsraksta dizains   */
+		h1, h2, h3 {
+			font-weight: normal;
+			text-shadow: 2px 2px #dadada;
+		}
+		h1 { color: #000000; font-size: 32px; }
+		h2 { color: #b30000; font-size: 24px; } 
+		h3 { color: #007acc; font-size: 20px; }
+
+		/*  Horizontālā līnija  */
+		hr {border: 1px solid #a2a2a2;}
+		
+		/*  Darba sadaļa  */
+		section {
+			padding: 20px;
+			width: 60%;
+			background-color: #f2f2f2;
+			border-radius: 8px;
+			box-shadow: 7px 7px 4px #6f6f6f inset;
+		}
+		
+		/*  Rezultātu diskusiju sadaļa  */
+		header {
+			width: 50%;
+			padding: 0px;
+		}
+		footer {
+			position: relative;
+			width: 100%;
+			padding: 0px;
+		}
+		textarea {
+			padding: 20px;
+			margin-right: 20px;
+			background: #292929;
+			font-size: 18px;
+			color: #00fd00;
+			border: 1px solid #00fd00;
+			border-radius: 8px;
+			box-shadow: 7px 9px 4px #6f6f6f;
+			outline: none;
+		}
+		
+		/*  Sadaļa ar atsaucēm  */
+		article {
+			position: relative;
+			width: 60%;
+			padding: 30px;
+			background-color: #292929;
+			color: #f8ead6;
+			border: 14px groove #c1824c;
+			border-radius: 8px;
+			column-count: 2;
+		}
+		/*  Hipersaites  */
+		article a {color: #00fd00; text-decoration: none;}
+		article a:hover, a:focus {color: #ff4242; text-decoration: none;}
+		
+		/*  Teksta lauka stils  */
+		input[type=text] {
+			width: 100%;
+			padding: 6px;
+			font: 18px Verdana;
+			border: 2px solid #838383;
+			border-radius: 8px;
+			box-shadow: 3px 3px 2px #6f6f6f inset;
+			outline: none;		/*  Noņemiet kontūras apmali ap pogu  */
+		}
+		
+		/*  Pogas stils  */
+		input[type=button] {
+			padding: 6px 15px;
+			width: 100%;
+			background-color: #2891f5;
+			font: 18px Verdana;
+			color: #fff;
+			box-shadow: 7px 9px 4px #6f6f6f;
+			cursor: pointer;
+			border-radius: 8px;
+			outline: none;		/*  Noņemiet kontūras apmali ap pogu  */
+		}
+		input[type=button]:hover {
+			transition: 0.2s;	/*  Palēniniet pārmaiņas  */
+		}
+		input[type=button]:active {
+			box-shadow: 4px 4px 2px #383838;	/*  Nospiediet efekta simulāciju  */
+		}
+		
+		/*  Pielāgojiet konteineru izmērus un fontu, 
+			kad pārlūka lielums tika mainīts  */
+		@media screen and (max-width: 900px) {
+			body {
+				font: 14px Arial;
+			}
+			textarea {
+				font: 14px Arial;
+			}
+		}
+		#Noch{
+			height: 40px;
+			font-size: 25px;
+		}
+	</style>
+</head>
+<body>
+	<br><hr><br>
+	
+	<!--  Darba sadaļa  -->
+	<h2>Sadaļa Darbam</h2>
+	<section>
+		<input type="text" id="Noch" placeholder="Введите данное" style="width: 79%;">
+		<select id="vibor" style="width: 20%; height: 30px;">
+			<option value="vid">Название вида</option>
+			<option value="areal">Ареал обитания</option>
+			<option value="tsvet">Цвет кожи</option>
+			<option value="dlina">Длина тела</option>
+		</select>
+		<br><br>
+		<input type="button" onclick="Vnesi();" value="Внести данное">
+		<br><br>
+		<input type="button" onclick="Pokazhi();" value="Отобразить результат">
+		<br><br><br>
+		<input type="button" id="knopka" onclick="Sdelaj();" value="Новое животное" style="width: 97%;">
+		<input type="button" id="knopochka" onclick="Shag1();" value="+" style="width: 1%; visibility: hidden; padding: 0px 0px 0px 0px;">
+		<input type="button" id="knopochchka" onclick="Shag2();" value="=" style="width: 1%; visibility: hidden; padding: 0px 0px 0px 0px;">
+		<br><br>
+		<textarea id="mansRezultats" placeholder="Результат" rows="5" spellcheck="false" style="width: 100%; font-size: 22px; color: lime;"></textarea>
+		<br><br>
+		<input type="button" onclick="dzestpolya();" value="Очистить поля" style="background-color: #b30000; color: #f8ead6;">
+		<br><br>
+		<input type="button" onclick="dzestdannije();" value="Очистить данные" style="background-color: #b30000; color: #f8ead6;">
+	</section>
+
+<script>
+	var Zhivotnoje = new Object();
+	var Animal;
+	Zhivotnoje = {
+		Fish: {
+			Shark: {Name: '-', LeatherType: 'smooth', Habitat: '-', LeatherColor: '-', Length: '-',},
+			Tuna: {Name: '-', LeatherType: 'scaled', Habitat: 'sea water', LeatherColor: '-', Length: '-',},
+			Clupea: {Name: '-', LeatherType: 'scaled', Habitat: 'sea water', LeatherColor: '-', Length: '-',},
+			Amphiprion: {Name: '-', LeatherType: 'scaled', Habitat: 'sea water', LeatherColor: '-', Length: '-',}
+		},
+		Mammal: {
+			Dolphin: {Name: '-', LeatherType: 'smooth', Habitat: '-', LeatherColor: '-', Length: '-',},
+			Mole: {Name: '-', LeatherType: 'fur', Habitat: 'underground', LeatherColor: '-', Length: '-',},
+			Bear: {Name: '-', LeatherType: 'fur', Habitat: '-', LeatherColor: '-', Length: '-',},
+			Hyena: {Name: '-', LeatherType: 'fur', Habitat: 'savanna', LeatherColor: '-', Length: '-',}
+		},
+		Bird: {
+			Penguin: {Name: '-', LeatherType: 'feather', Habitat: 'Antarktida', LeatherColor: '-', Length: '-',},
+			Hummingbird: {Name: '-', LeatherType: 'feather', Habitat: 'American tropical forest', LeatherColor: '-', Length: '-',},
+			Sparrow: {Name: '-', LeatherType: 'feather', Habitat: '-', LeatherColor: '-', Length: '-',},
+			Toucan: {Name: '-', LeatherType: 'feather', Habitat: 'American tropical forest', LeatherColor: '-', Length: '-',}
+		},
+		Amphibia: {
+			Frog: {Name: '-', LeatherType: 'smooth wet', Habitat: '-', LeatherColor: '-', Length: '-',},
+			Salamandra: {Name: '-', LeatherType: 'smooth wet', Habitat: '-', LeatherColor: '-', Length: '-',},
+			Trituru: {Name: '-', LeatherType: 'smooth wet', Habitat: '-', LeatherColor: '-', Length: '-',},
+			Caeciliidae: {Name: '-', LeatherType: 'smooth slimed', Habitat: '-', LeatherColor: '-', Length: '-',}
+		},
+		Reptile: {
+			Snake: {Name: '-', LeatherType: 'scaled', Habitat: '-', LeatherColor: '-', Length: '-',},
+			Turtle: {Name: '-', LeatherType: 'littlt scales', Habitat: '-', LeatherColor: '-', Length: '-',},
+			Lizard: {Name: '-', LeatherType: 'scaled', Habitat: '-', LeatherColor: '-', Length: '-',},
+			Crocodile: {Name: '-', LeatherType: 'big scales', Habitat: '-', LeatherColor: '-', Length: '-',}
+		}
+	};
+	/*function Vnesi() {
+		var dannoje = document.getElementById("Noch").value;
+		var izbrannij = document.getElementById("vibor").value;
+		if (dannoje == ""){
+			document.getElementById("mansRezultats").value = "Внесите данное!";
+		} else {
+			if (izbrannij == "otrad"){
+				Object.defineProperty(Volvo, "Class", {value: dannoje})
+			} else if (izbrannij == "kozha") {
+				Object.defineProperty(Volvo, "Leather-type", {value: dannoje})
+			} else if (izbrannij == "tsvet"){
+				Object.defineProperty(Volvo, "Leather-color", {value: dannoje})
+			} else {
+				Object.defineProperty(Volvo, "Habitat", {value: dannoje})
+			}
+			document.getElementById("mansRezultats").value = "Данное успешно внесено!";
+		}
+	} */
+	function Pokazhi() {
+		document.getElementById("mansRezultats").value = "";
+		var parametres = "";
+		//alert(Animal.Name + "\n" + Animal.LeatherType + "\n" + Animal.Habitat + "\n" + Animal.LeatherColor + "\n" + Animal.Length);
+		//alert(parametres);
+		//alert(Object.keys(Animal).length);
+		alert(Object.keys(Zhivotnoje.Fish.Shark)[1]);
+		for (var i=0; i<5; i++){
+			alert("Хай!");
+			parametres = parametres + Object.keys(Animal)[i] + " - " + Object.values(Animal)[i] + ";\n";
+		}
+		document.getElementById("mansRezultats").value = "Животное: \n" + parametres;
+	}
+	function Sdelaj() {
+		document.getElementById("mansRezultats").style.color = "lime";
+		document.getElementById("mansRezultats").value = "Животное какого класса Вы хотите сделать? \nДоступные классы: Рыбы, Млекопитающие, Птицы, Земноводные, Пресмыкающиеся.";
+		document.getElementById("knopka").style.width = "80%";
+		document.getElementById("knopochka").style.width = "19%";
+		document.getElementById("knopochka").style.visibility = "visible";
+		document.getElementById("knopochka").style.padding = "6px 15px";
+	}
+	function Shag1() {
+		var klass = document.getElementById("Noch").value;
+		if (klass == "Рыбы" || klass == "рыбы") {
+			document.getElementById("mansRezultats").color = "lime";
+			document.getElementById("mansRezultats").value = "Рыбу какого семейства Вы хотите сделать? \nДоступные семейства: Акулы, Тунцы, Сельди, Рыбы-клоуны.";
+			newBut();
+		} else if (klass == "Млекопитающие" || klass == "млекопитающие") {
+			document.getElementById("mansRezultats").color = "lime";
+			document.getElementById("mansRezultats").value = "Млекопитающее какого семейства Вы хотите сделать? \nДоступные семейства: Дельфины, Кроты, Медведи, Гиены.";
+			newBut();
+		} else if (klass == "Птицы" || klass == "птицы") {
+			document.getElementById("mansRezultats").color = "lime";
+			document.getElementById("mansRezultats").value = "Птицу какого семейства Вы хотите сделать? \nДоступные семейства: Пингвины, Колибри, Воробьи, Туканы.";
+			newBut();
+		} else if (klass == "Земноводные" || klass == "земноводные") {
+			document.getElementById("mansRezultats").color = "lime";
+			document.getElementById("mansRezultats").value = "Земноводное какого семейства Вы хотите сделать? \nДоступные семейства: Лягушки, Саламандры, Тритоны, Червяги.";
+			newBut();
+		} else if (klass == "Пресмыкающиеся" || klass == "пресмыкающиеся") {
+			document.getElementById("mansRezultats").color = "lime";
+			document.getElementById("mansRezultats").value = "Пресмыкающееся какого семейства Вы хотите сделать? \nДоступные семейства: Змеи, Черепахи, Ящерицы, Крокодилы.";
+			newBut();
+		} else {
+			document.getElementById("mansRezultats").color = "red";
+			document.getElementById("mansRezultats").value = "Нет такого класса! Создайте новое животное!";
+			document.getElementById("knopochka").style.width = "1%";
+			document.getElementById("knopochka").style.visibility = "hidden";
+			document.getElementById("knopochka").style.padding = "0px 0px 0px 0px";
+			document.getElementById("knopka").style.width = "97%";
+		}
+	}
+	function Shag2() {
+		Animal = new Object();
+		var b = document.getElementById("Noch").value;
+		if (b == "Акулы" || b == "акулы") {
+			document.getElementById("mansRezultats").value = "Вы создали акулу!";
+			Animal = Object.create(Zhivotnoje.Fish.Shark);
+			//alert(Animal.LeatherType);
+		} else if (b == "Тунцы" || b == "тунцы") {
+			document.getElementById("mansRezultats").value = "Вы создали тунца!";
+			Animal = Object.create(Zhivotnoje.Fish.Tuna);
+		} else if (b == "Сельди" || b == "сельди") {
+			document.getElementById("mansRezultats").value = "Вы создали сельдь!";
+			Animal = Object.create(Zhivotnoje.Fish.Clupea);
+		} else if (b == "Рыбы-клоуны" || b == "рыбы-клоуны") {
+			document.getElementById("mansRezultats").value = "Вы создали рыбу-клоуна!";
+			Animal = Object.create(Zhivotnoje.Fish.Amphiprion);
+		} else if (b == "Дельфины" || b == "дельфины") {
+			document.getElementById("mansRezultats").value = "Вы создали дельфина!";
+			Animal = Object.create(Zhivotnoje.Mammal.Dolphin);
+		} else if (b == "Кроты" || b == "кроты") {
+			document.getElementById("mansRezultats").value = "Вы создали крота!";
+			Animal = Object.create(Zhivotnoje.Mammal.Mole);
+		} else if (b == "Медведи" || b == "медведи") {
+			document.getElementById("mansRezultats").value = "Вы создали медведя!";
+			Animal = Object.create(Zhivotnoje.Mammal.Bear);
+		} else if (b == "Гиены" || b == "гиены") {
+			document.getElementById("mansRezultats").value = "Вы создали гиену!";
+			Animal = Object.create(Zhivotnoje.Mammal.Hyena);
+		} else if (b == "Пингвины" || b == "пингвины") {
+			document.getElementById("mansRezultats").value = "Вы создали пингвина!";
+			Animal = Object.create(Zhivotnoje.Bird.Penguin);
+		} else if (b == "Колибри" || b == "колибри") {
+			document.getElementById("mansRezultats").value = "Вы создали колибри!";
+			Animal = Object.create(Zhivotnoje.Bird.Hummingbird);
+		} else if (b == "Воробьи" || b == "воробьи") {
+			document.getElementById("mansRezultats").value = "Вы создали воробья!";
+			Animal = Object.create(Zhivotnoje.Bird.Sparrow);
+		} else if (b == "Туканы" || b == "туканы") {
+			document.getElementById("mansRezultats").value = "Вы создали тукана!";
+			Animal = Object.create(Zhivotnoje.Bird.Toucan);
+		} else if (b == "Лягушки" || b == "лягушки") {
+			document.getElementById("mansRezultats").value = "Вы создали лягушку!";
+			Animal = Object.create(Zhivotnoje.Amphibia.Frog);
+		} else if (b == "Саламандры" || b == "саламандры") {
+			document.getElementById("mansRezultats").value = "Вы создали саламандру!";
+			Animal = Object.create(Zhivotnoje.Amphibia.Salamandra);
+		} else if (b == "Тритоны" || b == "тритоны") {
+			document.getElementById("mansRezultats").value = "Вы создали тритона!";
+			Animal = Object.create(Zhivotnoje.Amphibia.Trituru);
+		} else if (b == "Червяги" || b == "червяги") {
+			document.getElementById("mansRezultats").value = "Вы создали червягу!";
+			Animal = Object.create(Zhivotnoje.Amphibia.Caeciliidae);
+		} else if (b == "Змеи" || b == "змеи") {
+			document.getElementById("mansRezultats").value = "Вы создали змею!";
+			Animal = Object.create(Zhivotnoje.Reptile.Snake);
+		} else if (b == "Черепахи" || b == "черепахи") {
+			document.getElementById("mansRezultats").value = "Вы создали черепаху!";
+			Animal = Object.create(Zhivotnoje.Reptile.Turtle);
+		} else if (b == "Ящерицы" || b == "ящерицы") {
+			document.getElementById("mansRezultats").value = "Вы создали ящерицу!";
+			Animal = Object.create(Zhivotnoje.Reptile.Lizard);
+		} else if (b == "Крокодилы" || b == "крокодилы") {
+			document.getElementById("mansRezultats").value = "Вы создали крокодила!";
+			Animal = Object.create(Zhivotnoje.Reptile.Crocodile);
+		} else {
+			document.getElementById("mansRezultats").color = "red";
+			document.getElementById("mansRezultats").value = "Нет такого семейства! Создайте новое животное!";
+			document.getElementById("knopochka").style.width = "1%";
+			document.getElementById("knopochka").style.visibility = "hidden";
+			document.getElementById("knopochka").style.padding = "0px 0px 0px 0px";
+			document.getElementById("knopka").style.width = "97%";
+		}
+	}
+	function newBut() {
+		document.getElementById("knopochka").style.width = "1%";
+		document.getElementById("knopochka").style.visibility = "hidden";
+		document.getElementById("knopochka").style.padding = "0px 0px 0px 0px";
+		document.getElementById("knopochchka").style.width = "17%";
+		document.getElementById("knopochchka").style.visibility = "visible";
+		document.getElementById("knopochchka").style.padding = "6px 15px";
+	}
+	/*function dzestpolya() {
+		document.getElementById("Noch").value = "";
+		document.getElementById("mansRezultats").value = "";
+	}
+	function dzestdannije() {
+		Object.defineProperty(Volvo, "Model", {value: ""})
+		Object.defineProperty(Volvo, "Color", {value: ""})
+		Object.defineProperty(Volvo, "Year", {value: ""})
+		document.getElementById("mansRezultats").value = "Данные успешно очищены!";
+	}*/
+</script>
+</body>
+</html>

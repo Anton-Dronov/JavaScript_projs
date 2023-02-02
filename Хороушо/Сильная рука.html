@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Anton (C)">
+	<meta name="description" content="Web Programming and Design">
+	<meta name="keywords" content="web, html, css, javascript">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JS Test</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css">
+	<script type="text/javascript" src=""></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		/*  Saglabājiet jebkuras konteinera noteikto platumu un augstumu, 
+			izlaižot papildu izmērus apmalēm un polsterējumam   */
+		* {box-sizing: border-box;}
+		/*  BODY tagu vispārīgais stils  */
+		body {
+			margin: 30px;
+			padding: 0;
+			font: 18px sans-serif;
+			background-position: calc(55% + 100px) 30px;
+			background-color: lightgray;
+			background-repeat: no-repeat;
+			color: black;
+		}
+		/*  Hipersaites  */
+		a {color: #2891f5; text-decoration: none;}
+		a:hover, a:focus {color: #b30000; text-decoration: none;}
+		/*   Virsraksta dizains   */
+		h1, h2, h3 {
+			font-weight: normal;
+			text-shadow: 2px 2px #dadada;
+		}
+		h1 { color: #000000; font-size: 32px; }
+		h2 { color: #b30000; font-size: 24px; } 
+		h3 { color: #007acc; font-size: 20px; }
+		/*  Horizontālā līnija  */
+		hr {border: 1px solid #a2a2a2;}
+		/*  Darba sadaļa  */
+		section {
+			padding: 20px;
+			width: 60%;
+			background-color: darkgray;
+			border-radius: 8px;
+			box-shadow: 7px 7px 4px gray inset;
+		}
+		/*  Rezultātu diskusiju sadaļa  */
+		header {
+			width: 50%;
+			padding: 0px;
+		}
+		footer {
+			position: relative;
+			width: 100%;
+			padding: 0px;
+		}
+		textarea {
+			padding: 20px;
+			margin-right: 20px;
+			background: #292929;
+			font-size: 18px;
+			color: #00fd00;
+			border: 1px solid #00fd00;
+			border-radius: 8px;
+			box-shadow: 7px 9px 4px #6f6f6f;
+			outline: none;
+		}
+		/*  Sadaļa ar atsaucēm  */
+		article {
+			position: relative;
+			width: 60%;
+			padding: 30px;
+			background-color: #292929;
+			color: #f8ead6;
+			border: 14px groove #c1824c;
+			border-radius: 8px;
+			column-count: 2;
+		}
+		/*  Hipersaites  */
+		article a {color: #00fd00; text-decoration: none;}
+		article a:hover, a:focus {color: #ff4242; text-decoration: none;}
+		/*  Teksta lauka stils  */
+		input[type=text] {
+			width: 100%;
+			padding: 6px;
+			font: 18px Verdana;
+			border: 2px solid #838383;
+			border-radius: 8px;
+			box-shadow: 3px 3px 2px #6f6f6f inset;
+			/*  Noņemiet kontūras apmali ap pogu  */
+			outline: none;
+		}
+		/*  Pogas stils  */
+		input[type=button] {
+			padding: 6px 15px;
+			width: 100%;
+			background-image: linear-gradient(to bottom, silver, white, silver);
+			font: 18px Verdana;
+			color: black;
+			font-weight: bold;
+			box-shadow: 7px 9px 4px #6f6f6f;
+			cursor: pointer;
+			border-radius: 8px;
+			/*  Noņemiet kontūras apmali ap pogu  */
+			outline: none;
+		}
+		/*  Palēniniet pārmaiņas  */
+		input[type=button]:hover {
+			transition: 0.2s;
+		}
+		/*  Nospiediet efekta simulāciju  */
+		input[type=button]:active {
+			box-shadow: 4px 4px 2px #383838;
+		}
+		/*  Pielāgojiet konteineru izmērus un fontu, 
+			kad pārlūka lielums tika mainīts  */
+		@media screen and (max-width: 900px) {
+			body {
+				font: 14px Arial;
+			}
+			textarea {
+				font: 14px Arial;
+			}
+		}
+		/*  Стиль верхнего текста  */
+		#upperheader{
+			width: 50%;
+			text-align: center;
+			transition: height 2s, width 2s, margin-left 2s;
+			position: relative;
+			margin-left: 400px;
+		}
+		/*  Стиль навигационной панели  */
+		#navbar{
+			padding-top: 1px;
+			position: fixed;
+			right: 0px;
+			bottom: 300px;
+			width: 66px;
+			text-align: center;
+			height: 194px;
+			background-color: transparent;
+		}
+		#upperheader:hover {
+			height: 50%;
+			width: 110%;
+			margin-left: 0px;
+		}
+		#you{
+			float: right;
+			transition: height 1s, width 1s;
+		}
+		#inst{
+			float: right;
+			transition: height 1s, width 1s;
+		}
+		#vak{
+			float: right;
+			transition: height 1s, width 1s;
+		}
+		#you:hover {
+			height: 100px;
+			width: 100px;
+		}
+		#inst:hover {
+			height: 100px;
+			width: 100px;
+		}
+		#vak:hover {
+			height: 100px;
+			width: 100px;
+		}
+		i{
+			font-size: 50px;
+			color: gray;
+			padding: 10px;
+		}
+		#aroow{
+			float: right;
+			margin-right: 200px;
+			width: 75px;
+			visibility: hidden;
+			animation: aman 1s linear 0s infinite normal;
+		}
+		#punkt{
+			visibility: hidden;
+		}
+		@keyframes aman{
+			0% { transform: rotate(0deg); }
+			0.01% { transform: rotate(45deg); }
+			12.5% { transform: rotate(45deg); }
+			12.6% { transform: rotate(90deg); }
+			25% { transform: rotate(90deg); }
+			25.1% { transform: rotate(135deg); }
+			37.5% { transform: rotate(135deg); }
+			37.6% { transform: rotate(180deg); }
+			50% { transform: rotate(180deg); }
+			50.1% { transform: rotate(225deg); }
+			62.5% { transform: rotate(225deg); }
+			62.6% { transform: rotate(270deg); }
+			75% { transform: rotate(270deg); }
+			75.1% { transform: rotate(315deg); }
+			87.5% { transform: rotate(315deg); }
+			87.6% { transform: rotate(360deg); }
+			100% { transform: rotate(360deg); }
+		}
+		#prohibited, #nope, #yeah {
+			display: none;
+		}
+		.gg{
+			float: right;
+			margin-right: 350px;
+		}
+	</style>
+</head>
+<body>
+	<!--  Верхний текст, полученный в виде изображения  -->
+	<div ID="upperheader" onhover="Float()"><image src="images/ЧислаАрмстронга.png" style="width: 50%;"></div>
+	<!--  Верхняя часть документа, содержащая информацию о числах Армстронга  -->
+	<header>
+		<p>Числа Армстронга - это такие числа, у которых сумма цифр, входящих в состав числа и возведённых в степень количества цифр в числе, равна этому числу:
+			<br><br>
+		abc...y (n-значное число) = a<sup>n</sup> + b<sup>n</sup> + c<sup>n</sup> + ... + y<sup>n</sup></p>
+	</header>
+	<br><hr><br>
+	<!--  Принцип действия "анализатора Армстронга"  -->
+	<h2>Анализатор Армстронга</h2>
+	<p>Этот анализатор определяет, является ли введённое число числом Армстронга. Также можно посмотреть все числа Армстронга до десяти миллионов, нажав на кнопку 
+	"Показать числа Армстронга" (это может занять некоторое время). Для очистки полей нажмите кнопку "Очистить".</p>
+	<div class="gg"><div id="prohibited"><i class="fas fa-ban" style="color: orange;"></i></div><div id="nope"><i class="fas fa-times" style="color: red;"></i></div><div id="yeah"><i class="far fa-check-square" style="color: green;"></i></div></div><div id="aroow"><i class="fas fa-spinner"></i></div>
+	<section>
+		<!--  Место для введения числа на обработку  -->
+		<label for="maniDati">Введите число сюда: </label>
+		<input type="text" id="maniDati" placeholder="" style="color: green; font-weight: bold;">
+		<br><br>
+		<!--  Кнопка проверки  -->
+		<input type="button" onclick="manaFunkcija();" value="Проверка">
+		<br><br>
+		<!--  Кнопка для отображения чисел Армстронга  -->
+		<input type="button" onclick="OldOld();" value="Показать числа Армстронга">
+		<br><br>
+		<!--  Поле с результатом проверки  -->
+		<label for="mansRezultats">Результат проверки:&emsp;</label>
+		<textarea id="mansRezultats" placeholder="" rows="4" spellcheck="false" style="width: 100%; font-size: 22px; color: lime;"></textarea>
+		<br><br>
+		<!--  Кнопка для очистки всех полей  -->
+		<input type="button" onclick="dzestVisu();" value="Очистить" style="background-color: #b30000; color: black;">
+	</section>
+	<i class="fas fa-chevron-circle-up"></i><i class="fas fa-chevron-circle-up"></i><i class="fas fa-chevron-circle-up"></i><i class="fas fa-chevron-circle-up"></i><i class="fas fa-chevron-circle-up"></i><i class="fas fa-chevron-circle-up"></i><i class="fas fa-chevron-circle-up"></i><i class="fas fa-chevron-circle-up"></i><i class="fas fa-chevron-circle-up"></i><i class="fas fa-chevron-circle-up"></i><i class="fas fa-chevron-circle-up"></i><i class="fas fa-chevron-circle-up"></i>
+	<div id="punkt"><i class="fas fa-check" style="color: green;"></i></div>
+	<!--  Навигационная панель с моими соц.сетями  -->
+	<div ID="navbar"><a href="https://www.youtube.com/channel/UCpZEvxOaqfGX1ZZp1s2ktKw?view_as=subscriber" target="_blank"><img class="logo" src="images/youtube.png" id="you"></a><a href="https://www.instagram.com/hrantan30/" target="_blank"><img class="logo" src="images/instagram.png"id="inst"></a><a href="https://vk.com/hrantan" target="_blank"><img class="logo" src="images/vkontakte.png"id="vak"></a></div>
+<!--  Открытие скрипта  -->
+<script>
+	//  Описание функции, выполняемой при нажатии кнопки "Проверка"
+	function manaFunkcija() {
+		//  Получение данных из поля
+		var mansLauks = document.getElementById("maniDati").value;
+		//  Задание переменных
+		var ArmMass = [];
+		var stipendija = 0; 
+		var mansRez = 0;
+		var k = 1;
+		//  Это число больше нуля?
+		if (mansLauks <= 0) {
+			//  Если это число меньше нуля
+			//  Перекрашивание цвета текста результата в красный
+			document.getElementById("mansRezultats").style.color = "orange";
+			//  Сообщение об ошибке
+			document.getElementById("mansRezultats").value = "Введите число больше нуля!";
+			document.getElementById("prohibited").style.display = "block";
+			document.getElementById("nope").style.display = "none";
+			document.getElementById("yeah").style.display = "none";
+			document.getElementById("zvuk3").play();
+		//  Число ли это вообще?
+		} else if (isNaN(mansLauks)) {
+			//  Если это не число или в поле введено несколько чисел
+			//  Перекрашивание цвета текста результата в красный
+			document.getElementById("mansRezultats").style.color = "orange";
+			//  Сообщение об ошибке
+			document.getElementById("mansRezultats").value = "Вводимыми данными могут быть только цифры!";
+			document.getElementById("prohibited").style.display = "block";
+			document.getElementById("nope").style.display = "none";
+			document.getElementById("yeah").style.display = "none";
+			document.getElementById("zvuk3").play();
+		//  Это число целое?
+		} else if (Number.isInteger(Number(mansLauks)) == 0) {
+			//  Если данное число имеет остаток
+			//  Перекрашивание цвета текста результата в красный
+			document.getElementById("mansRezultats").style.color = "orange";
+			//  Сообщение об ошибке
+			document.getElementById("mansRezultats").value = "Число должно быть целым!";
+			document.getElementById("prohibited").style.display = "block";
+			document.getElementById("nope").style.display = "none";
+			document.getElementById("yeah").style.display = "none";
+			document.getElementById("zvuk3").play();
+		} else {
+			//  Если это целое число, которое больше нуля
+			//  Раздедение на отдельные цифры
+			ArmMass = mansLauks.split("");
+			//  Определение длины числа
+			stipendija = ArmMass.length;
+			//  Пока количество раз, которые прошёл цикл, меньше значности числа 
+			while (k <= stipendija) {
+				//  Сумма степеней цифр
+				mansRez = mansRez + parseInt(Math.pow(ArmMass[k-1], stipendija));
+				//  Занесение в базу количество выполненных циклом раз
+				k = k + 1;
+			}
+			//  Выведение результата
+				//  Результат положительный
+			if (mansRez == Number(mansLauks)) {
+				//  Перекрашивание цвета текста результата в лаймовый
+			document.getElementById("mansRezultats").style.color = "lime";
+				//  Формирование ответа с помощью выведения двух данных. В данном случае они одинаковы
+			document.getElementById("mansRezultats").value = "Это число является числом Армстронга: " + mansRez + " = " + mansLauks;
+				//  Результат отрицательный
+			document.getElementById("zvuk2").play();
+			document.getElementById("prohibited").style.display = "none";
+			document.getElementById("nope").style.display = "none";
+			document.getElementById("yeah").style.display = "block";
+			} else {
+				//  Перекрашивание цвета текста результата в оранжевый
+			document.getElementById("mansRezultats").style.color = "red";
+				//  Формирование ответа с помощью выведения двух данных. В данном случае они различны
+			document.getElementById("mansRezultats").value = "Это число не является числом Армстронга: " + mansRez + " ≠ " + mansLauks;
+			document.getElementById("zvuk1").play();
+			document.getElementById("prohibited").style.display = "none";
+			document.getElementById("nope").style.display = "block";
+			document.getElementById("yeah").style.display = "none";
+			}
+		}
+	smenit.style.visibility = "hidden";
+	}
+	var repress;
+	var loading = document.getElementById("aroow");
+	var smenit = document.getElementById("punkt");
+	function OldOld() {
+			document.getElementById("prohibited").style.display = "none";
+			document.getElementById("nope").style.display = "none";
+			document.getElementById("yeah").style.display = "none";
+			document.getElementById("zvuk4").play();
+			loading.style.visibility = "visible";
+			repress = setTimeout(NewNew, 1000);
+	}
+	//  Описание функции, выполняемой при нажатии кнопки "Показать числа Армстронга" 
+	function NewNew() {
+		//  Задание переменных
+		var atbelde = "";
+		var Gassiv = [];
+		var stepnoy = 0;
+		var Atvinta = "";
+		//  Обработка цикла до 10 миллионов раз
+		smenit.style.visibility = "visible";
+		for (var i = 1; i < 10000000; i++) {
+			//  Обнуление суммы степеней
+			var mansNarez = 0;
+			//  Разбив числа на отдельные цифры
+			Gassiv = String(i).split("");
+			//  Определение длины числа
+			stepnoy = Gassiv.length;
+			//  Пока количество раз, которые прошёл цикл, меньше значности числа
+			for (var j = 0; j < stepnoy; j++) {
+				//  Сумма степеней
+				mansNarez = mansNarez + Math.pow(Gassiv[j], stepnoy);
+			}
+			//  Равна ли сумма степеней цифр самому числу?
+			if (mansNarez == i) {
+				//  Внесение в базу полученных чисел Армстронга
+				atbelde = atbelde + mansNarez + "; ";
+			}
+		}
+		//  Формулировка ответа
+		Atvinta = "До десяти миллионов встречаются следующие числа Армстронга: \n" + atbelde ;
+		//  Перекрашивание цвета текста результата в лаймовый
+		document.getElementById("mansRezultats").style.color = "lime";
+		//  Присваивание полю ответа
+		document.getElementById("mansRezultats").value = Atvinta;
+		loading.style.visibility = "hidden";
+		document.getElementById("zvuk5").play();
+	}
+	//  Описание функции, выполняемой при нажатии кнопки "Очистить"
+	function dzestVisu() {
+		//  Очистка поля с введёнными данными
+		document.getElementById("maniDati").value = "";
+		//  Очистка поля с результатом проверки или числами Армстронга
+		document.getElementById("mansRezultats").value = "";
+		smenit.style.visibility = "hidden";
+		document.getElementById("prohibited").style.display = "none";
+		document.getElementById("nope").style.display = "none";
+		document.getElementById("yeah").style.display = "none";
+	}
+</script>
+<br>
+<br><hr>
+<p>Проверка числа происходит по данному алгоритму:</p>
+	<!--  Ссылка на блоксхему  -->
+	(Нажав <a href="Сильная блоксхема.html" target="_blank">здесь</a>, Вы можете увидеть блоксхему выполнения проверки).
+	<!--  Собственный логотип со вшитой ссылкой на мой канал Youtube  -->
+	<div style="position: fixed; right: 6px; bottom: 10px; z-index: 1;">
+		<a href="https://www.youtube.com/channel/UCpZEvxOaqfGX1ZZp1s2ktKw?view_as=subscriber" target="_blank">
+			<img src="images/MyLogo.png" style="width: 200px;">
+		</a>
+	</div>
+<audio id="zvuk1"><source src="images/wrong.m4a" type="audio/mp4"></audio>
+<audio id="zvuk2"><source src="images/ta-da.m4a" type="audio/mp4"></audio>
+<audio id="zvuk3"><source src="images/gabella.mp3" type="audio/mp3"></audio>
+<audio id="zvuk4"><source src="images/poihali.mp3" type="audio/mp3"></audio>
+<audio id="zvuk5"><source src="images/noice.mp3" type="audio/mp3"></audio>
+</body>
+</html>

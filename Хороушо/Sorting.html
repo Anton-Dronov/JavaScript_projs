@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Anton (C)">
+	<meta name="description" content="Web Programming and Design">
+	<meta name="keywords" content="web, html, css, javascript">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JS Test</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" type="text/css" href="">
+	<script type="text/javascript" src=""></script>
+	<style>
+		/*  Saglabājiet jebkuras konteinera noteikto platumu un augstumu, 
+			izlaižot papildu izmērus apmalēm un polsterējumam   */
+		* {box-sizing: border-box;}
+		
+		/*  BODY tagu vispārīgais stils  */
+		body {
+			margin: 30px;
+			padding: 0;
+			font: 18px sans-serif;
+			background-image: url("images/javascript.png");
+			background-position: calc(55% + 100px) 30px;
+			background-repeat: no-repeat;
+			background-color: #fff;
+		}
+		
+		/*  Hipersaites  */
+		a {color: #2891f5; text-decoration: none;}
+		a:hover, a:focus {color: #b30000; text-decoration: none;}
+		
+		/*   Virsraksta dizains   */
+		h1, h2, h3 {
+			font-weight: normal;
+			text-shadow: 2px 2px #dadada;
+		}
+		h1 { color: #000000; font-size: 32px; }
+		h2 { color: #b30000; font-size: 24px; } 
+		h3 { color: #007acc; font-size: 20px; }
+
+		/*  Horizontālā līnija  */
+		hr {border: 1px solid #a2a2a2;}
+		
+		/*  Darba sadaļa  */
+		section {
+			padding: 20px;
+			width: 60%;
+			background-color: #f2f2f2;
+			border-radius: 8px;
+			box-shadow: 7px 7px 4px #6f6f6f inset;
+		}
+		
+		/*  Rezultātu diskusiju sadaļa  */
+		header {
+			width: 50%;
+			padding: 0px;
+		}
+		footer {
+			position: relative;
+			width: 100%;
+			padding: 0px;
+		}
+		textarea {
+			padding: 20px;
+			margin-right: 20px;
+			background: #292929;
+			font-size: 18px;
+			color: #00fd00;
+			border: 1px solid #00fd00;
+			border-radius: 8px;
+			box-shadow: 7px 9px 4px #6f6f6f;
+			outline: none;
+		}
+		
+		/*  Sadaļa ar atsaucēm  */
+		article {
+			position: relative;
+			width: 60%;
+			padding: 30px;
+			background-color: #292929;
+			color: #f8ead6;
+			border: 14px groove #c1824c;
+			border-radius: 8px;
+			column-count: 2;
+		}
+		/*  Hipersaites  */
+		article a {color: #00fd00; text-decoration: none;}
+		article a:hover, a:focus {color: #ff4242; text-decoration: none;}
+		
+		/*  Teksta lauka stils  */
+		input[type=text] {
+			width: 100%;
+			padding: 6px;
+			font: 18px Verdana;
+			border: 2px solid #838383;
+			border-radius: 8px;
+			box-shadow: 3px 3px 2px #6f6f6f inset;
+			outline: none;		/*  Noņemiet kontūras apmali ap pogu  */
+		}
+		
+		/*  Pogas stils  */
+		input[type=button] {
+			padding: 6px 15px;
+			width: 100%;
+			background-color: #2891f5;
+			font: 18px Verdana;
+			color: #fff;
+			box-shadow: 7px 9px 4px #6f6f6f;
+			cursor: pointer;
+			border-radius: 8px;
+			outline: none;		/*  Noņemiet kontūras apmali ap pogu  */
+		}
+		input[type=button]:hover {
+			transition: 0.2s;	/*  Palēniniet pārmaiņas  */
+		}
+		input[type=button]:active {
+			box-shadow: 4px 4px 2px #383838;	/*  Nospiediet efekta simulāciju  */
+		}
+		
+		/*  Pielāgojiet konteineru izmērus un fontu, 
+			kad pārlūka lielums tika mainīts  */
+		@media screen and (max-width: 900px) {
+			body {
+				font: 14px Arial;
+			}
+			textarea {
+				font: 14px Arial;
+			}
+		}
+	</style>
+</head>
+<body>
+	<br><hr><br>
+	
+	<!--  Darba sadaļa  -->
+	<h2>Sadaļa Darbam</h2>
+	<section>
+		<!--  Lauks ar datiem, kas jānodod JS funkcijai  -->
+		<label for="maniDati">Sākotnējie dati: </label>
+		<input type="text" id="maniDati" placeholder="Ievadiet datus">
+		<br>
+		<select id="selektor">
+			<option value="up">upper</option>
+			<option value="down">lower</option>
+		</select>
+		&nbsp => &nbsp
+		<select id="uslovie">
+			<option value="1">Number</option>
+			<option value="a">Text</option>
+		</select>
+		<br>
+		<!--  Poga JS koda sākšanai  -->
+		<input type="button" onclick="manaFunkcija();" value="Aprēķināt">
+		<br><br>
+		<!--  Lauks ar resultātu  -->
+		<label for="mansRezultats">JS Rezultāts:&emsp;</label>
+		<textarea id="mansRezultats" placeholder="Rezultāts" rows="4" spellcheck="false" style="width: 100%; font-size: 22px; color: lime;"></textarea>
+		<br><br>
+		<!--  Poga, lai nodzēst visus laukus  -->
+		<input type="button" onclick="dzestVisu();" value="Dzēst" style="background-color: #b30000; color: #f8ead6;">
+	</section>
+
+<script>
+	function manaFunkcija() {
+		var lauksMas = [];
+		//  Iegūstiet datus no lauka
+		var mansLauks = document.getElementById("maniDati").value;
+		var Sys = document.getElementById("selektor").value;
+		var Sas = document.getElementById("uslovie").value;
+		//  Pārbaude: nekas netika ievadīts
+		if (mansLauks == "") {
+			//  Mainiet teksta krāsu uz sarkanu
+			document.getElementById("mansRezultats").style.color = "red";
+			document.getElementById("mansRezultats").value = "Ievadiet vērtību!";
+		} else {
+			lauksMas = mansLauks.split("");
+			if (Sas == "1"){
+				if (Sys == "up") {
+					lauksMas.sort(function(a, b){return a-b});
+				} else {
+					lauksMas.sort(function(a, b){return b-a});
+				}
+			} else {
+				if (Sys == "up") {
+					lauksMas.sort();
+				} else {
+					lauksMas.sort().reverse();
+				}
+			}
+			document.getElementById("mansRezultats").style.color = "lime";
+			document.getElementById("mansRezultats").value = lauksMas;
+		}
+
+	}
+	
+	//  Funkcija visu lauku tīrīšanai
+	function dzestVisu() {
+		document.getElementById("maniDati").value = "";
+		document.getElementById("mansRezultats").value = "";
+	}
+</script>
+
+	<br><br><hr><br>
+	
+	<!--  Rezultātu diskusiju sadaļa  -->
+	<h2>JavaScript Koda Sadaļa</h2>
+	<footer>
+		<textarea rows="30" cols="86" spellcheck="false" placeholder="Jūsu JavaScript funkcija">
+function manaFunkcija() {
+	//  Iegūstiet datus no lauka
+	var mansLauks = document.getElementById("maniDati").value;
+	//  Nekas netika ievadīts
+	if (mansLauks == "") {
+		//  Mainiet teksta krāsu
+		document.getElementById("mansRezultats").style.color = "red";
+		document.getElementById("mansRezultats").value = "Ievadiet vērtību!";
+	} else {
+		//  Apgrieziet virknes vērtību
+		mansLauks = mansLauks.split("").reverse().join("");
+		//
+		//  Atjaunojiet teksta sākotnējo melno krāsu
+		document.getElementById("mansRezultats").style.color = "lime";
+		//  Ievietojiet datus atbildes laukā
+		document.getElementById("mansRezultats").value = mansLauks;
+	}
+}
+		</textarea>
+		<img src="images/boy03.png" alt="Gudrs skolnieks" title="Gudrs skolnieks" style="position: absolute; right: 0px; bottom: 50px; z-index: -1;">
+	</footer>
+	
+	<br><br><hr>
+	
+	<!--  Problēmas apspriešana  -->
+	<main style="display: flex; flex-direction: row; width: 100%;">
+		
+		<div class="fonaAttels" style="position: relative; width: 35%;">
+			<div style="position: absolute; z-index: -1; width: 100%; height: 100%; background-image: url('images/diagramma.png'); background-position: center; background-repeat: no-repeat; background-size: cover; opacity: 0.2;"></div>
+			
+			<div class="digramma" style="position: relative; z-index: 1; padding-right: 20px;">
+				<h2>Diagramma</h2>
+				<p style="text-align: center;"><img src="images/flow-chart.png" title="Blokshēma" style="float: left;" alt="Blokshēma"><a href="blokshema.html" target="_blank">Noklikšķiniet šeit, lai redzētu JavaScript programmas blokshēmu.</a></p>
+				<p><b>Neaizmirstiet:</b> vienmēr sāciet savu uzdevumu no diagrammas! Tas jums palīdzēs visā darbā.</p>
+			</div>
+		</div>
+		
+		<div class="apspriesana" style="width: 65%; padding: 0 20px 20px 20px; border-left: 2px solid #a2a2a2;">
+			<h2>Problēmas apspriešana</h2>
+			<p>Parasti JavaScript algoritms šai problēmai izskatās ļoti vienkārši:</p>
+			<ul>
+				<li>
+					Pārbaudiet ievadītās vērtības,
+				</li>
+				<li>
+					Aprēķināt LKD vērtību,
+				</li>
+				<li>
+					Izdrukāt rezultātu.
+				</li>
+			</ul>
+			<p>Skatiet <a href="blokshema.html" target="_blank">blokshēmu</a>, kas sniegts kreisajā sadaļā.</p>
+
+			<p>Vissarežģītākā šī koda daļa ir pirmais bloks. Tas sastāv no divām daļām:</p>
+			<ul>
+				<li>
+					Pārbaudiet, vai kaut kas ir ievadīts, un ja tas bija, vai tā bija skaitļa vērtība, vai nē.
+				</li>
+				<li>
+					Pārbaudiet, vai šī numura bāze ir izvēlēta pareizi.
+				</li>
+			</ul>
+
+			<p>Lai veiktu šo pārbaudi, jums ir jāsadala skaitlis, kas ievadīts, atsevišķos ciparos, un rezultāts jāsaglabā jaunajā masīvā. Pēc tam pārbaudiet katru šī masīva elementu (ciparu) attiecībā pret izvēlētās bāzes vērtību. Ja visas šīs pārbaudes izturēsies, sāksies konvertēšanas process<a href="" target="_blank"><sup>(2)</sup></a>.</p>
+		</div>
+	</main>
+	
+	<hr><br>
+	
+	<!--  Iegult CodePen HTML-JS konsoli  -->
+	<h2>CodePen Panelis</h2>
+	<p><b>Šeit varat izmēģināt JavaScript kodu.</b></p>
+	<p data-height="450" data-theme-id="0" data-slug-hash="jYVvao" data-default-tab="js,result" data-user="w3resource" data-embed-version="2" data-pen-title="JavaScript code" data-editable="true" class="codepen"><a href="https://codepen.io/w3resource/pen/jYVvao/" target="_blank">See CodePen</a></p>
+	<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+	<p><b>Piezīme:</b> izmantojiet <i>return manaVertiba;</i> un <i>console.log(manaFunkcija(jusuMainiga));</i></p>
+	<b>Piemers:</b><br><span style="color: #a77700;">
+	function manaFunkcija(xx) {<br>
+		&emsp;&emsp;&emsp;return Boolean(isNaN(xx));<br>
+	}<br>
+	console.log(manaFunkcija("tt"));</span>
+	<br><hr><br>
+	
+	<!--  Tabula ar noderīgiem saitiem  -->
+	<h2>Noderīgas Saites</h2>
+	<article>
+		<i>Ļoti ieteicams!</i>
+		<ol>
+			<li>
+				<a href="http://www.elejasvsk.lv/dokumenti/javascript.pdf" 
+				target="_blank">A. Lācis, J. Tumovs - JavaScript izmantošana 
+				mājas lapu veidošanā</a>
+			</li>
+			<li>
+				<a href="http://speakingjs.com/es5/index.html" target="_blank">Dr. Axel Raschmayer - Speaking JavaScript, 2013</a>
+			</li>
+			<li>
+				<a href="https://www.clevercode.lv/theory/tree" target="_blank">CleverCode - Programmēšana</a>
+			</li>
+			<li>
+				<a href="https://visc.gov.lv/vispizglitiba/saturs/dokumenti/programmas/vidskolai/progpam_23052008.pdf" target="_blank">ISEC - Programmēšanas Pamati, 2008</a>
+			</li>
+			<li>
+				<a href="https://www.uzdevumi.lv/p/programmesana" target="_blank">Uzdevumi.lv - Programmēšana</a>
+			</li>
+			<li>
+				<a href="https://websitesetup.org/wp-content/uploads/2018/04/wsu-js-cheat-sheet.pdf" target="_blank">JavaScript Cheat Sheet, 2018</a>
+			</li>
+			<li>
+				<a href="https://www.w3schools.com/js/default.asp" target="_blank">W3schools JS Tutorial</a>
+			</li>
+			<li>
+				<a href="https://www.w3schools.com/js/js_best_practices.asp" target="_blank">W3schools JS Best Practices</a>
+			</li>
+			<li>
+				<a href="https://www.w3schools.com/js/js_mistakes.asp" target="_blank">W3schools JS Common Mistakes</a>
+			</li>
+			<li>
+				<a href="https://rextester.com/l/js_online_compiler" target="_blank">JavaScript Compiler</a>
+			</li>
+			<li>
+				<a href="https://codepen.io/pen/" target="_blank">CodePen HTML-JS Compiler</a>
+			</li>
+			<li>
+				<a href="https://frontendmasters.com/courses/javascript-hard-parts-v2/" target="_blank">FrontendMasters Courses</a>
+			</li>
+			<li>
+				<a href="https://code.google.com/archive/search?q=domain:code.google.com%20label:JavaScript" target="_blank">Google JavaScript Archive</a>
+			</li>
+			<li>
+				<a href="https://www.guru99.com/interactive-javascript-tutorials.html" target="_blank">JavaScript Tutorial for Beginners</a>
+			</li>
+			<li>
+				<a href="https://www.tutorialspoint.com/javascript/index.htm" target="_blank">TutorialsPoint JS Tutorial</a>
+			</li>
+			<li>
+				<a href="https://javascript.info/" target="_blank">Modern JavaScript Tutorial</a>
+			</li>
+			<li>
+				<a href="https://www.youtube.com/playlist?list=PLWKjhJtqVAbllLK6r2dnGjUVWB_cFNcuO" target="_blank">JavaScript Tutorial - YouTube</a>
+			</li>
+			<li>
+				<a href="https://www.youtube.com/playlist?list=PLWKjhJtqVAbleDe3_ZA8h3AO2rXar-q2V" target="_blank">JavaScript in 3 hours - YouTube</a>
+			</li>
+			<li>
+				<a href="https://www.w3resource.com/javascript-exercises/javascript-functions-exercises.php" target="_blank">JavaScript Exercises</a>
+			</li>
+		</ol>
+		
+		<!--  Konteiners ar krītu  -->
+		<div style="position: absolute; right: 10%; bottom: 0px; font-size: 6px; color: white;">&#11036;&#11036;&#11036;&#11036;</div>
+		
+		<!--  Konteiners ar sūkli  -->
+		<div style="position: absolute; left: 45%; bottom: -20px; font-size: 46px; color: white;">&#128173;</div>
+	</article>
+	
+	<br><br><hr><br><br><br><br><br><br><br><br><br><br>
+	
+	<!--   PP logo   -->
+	<div style="position: fixed; right: 6px; top: 10px; z-index: 1;">
+		<a href="http://ppskola.epizy.com/paradiman/" target="_blank">
+			<span style="font: normal italic 56px monospace; text-shadow: 2px -2px 3px #4d4d4d;">PP<img src="images/pp-logo.png" alt="" title="Apmeklējiet manus tīmekļa resursus" style="vertical-align: middle; margin-left: 6px;"></span>
+		</a>
+	</div>
+	
+	<!--   Pāvela skola   -->
+	<div style="position: fixed; right: 6px; bottom: 10px; z-index: 1;">
+		<a href="http://ppskola.epizy.com/code-library/" target="_blank">
+			<b>{KODĒŠANA = DZEJA;}
+			<br>
+			&emsp;<i>var PP = SKOLA;</i></b>
+		</a>
+	</div>
+
+</body>
+</html>

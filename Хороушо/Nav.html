@@ -1,0 +1,125 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Anton (C)">
+	<meta name="description" content="A site about navigation bar">
+	<meta name="keywords" content="Navigation, navigation, Navbar, navbar">
+	<title>Navigation bar</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/a076d05399.js"></script><link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		body{
+			background-color: lightgray;
+		}
+		nav{
+			margin: 0px;
+			display: block;
+			height: 100px;
+			width: 100%;
+			z-index: 2;
+			background-color: black;
+			text-align: center;		
+		}
+		#NavBar{
+			width: 100%;
+			height: 100%;
+			color: pink;
+			text-align: center;
+			font-size: 30px;
+			font-weight: bold;
+			text-shadow: 2px 2px 1px darkred;
+		}
+		#NavBar td{
+			cursor: pointer;
+		}
+		#NavBar tr td:hover {
+			background-color: #e9f2db;
+			box-shadow: inset 4px 4px 3px #6f6f6f;
+			color: red;
+			text-decoration: none;
+		}
+		div{
+			width: 100%;
+			color: darkred;
+			text-shadow: 2px 2px 1px pink;
+			font-weight: bold;
+			font-size: 20px;
+			text-align: center;
+			height: 200px;
+			background-color: lightgray;
+			padding-top: 20px;
+			/* border: 5px inset gray; */
+			box-shadow: 0px 80px 40px -40px white inset;
+		}
+		#pakalpojumi {
+			display: none;
+		}
+		#cenas {
+			display: none;
+		}
+		#kontakti {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<table id="NavBar">
+			<tr>
+				<td>
+					<a onclick="myFunction('kont1')"><i class="fas fa-wrench"></i> Pakalpojumi <i class="fas fa-wrench"></i></a>
+				</td>
+				<td>
+					<a onclick="myFunction('kont2')"><i class="fas fa-euro-sign"></i> Cenas <i class="fas fa-euro-sign"></i></a>
+				</td>
+				<td>
+					<a onclick="myFunction('kont3')"><i class="fas fa-address-card"></i> Kontakti <i class="fas fa-address-card"></i></a>
+				</td>
+			</tr>
+		</table>
+	</nav>
+	<div id="pakalpojumi">
+		Loren ipsum
+	</div>
+	<div id="cenas">
+		Dolor sit
+	</div>
+	<div id="kontakti">
+		Emit
+	</div>
+<script>
+	function myFunction(tt) {
+		// alert(tt);
+		var q1 = document.getElementById("pakalpojumi");
+		var q2 = document.getElementById("cenas");
+		var q3 = document.getElementById("kontakti");
+		if(tt == "kont1") {
+			if(q1.style.display == "" || q1.style.display == "none") {
+				q2.style.display = "none";
+				q3.style.display = "none";
+				q1.style.display = "block";
+			} else {
+				q1.style.display = "none";
+			}
+		} else if(tt == "kont2") {
+			if(q2.style.display == "" || q2.style.display == "none") {
+				q1.style.display = "none";
+				q3.style.display = "none";
+				q2.style.display = "block";
+			} else {
+				q2.style.display = "none";
+			}
+		} else {
+			if(q3.style.display == "" || q3.style.display == "none") {
+				q1.style.display = "none";
+				q2.style.display = "none";
+				q3.style.display = "block";
+			} else {
+				q3.style.display = "none";
+			}
+		}
+	}
+</script>
+</body>
+</html>

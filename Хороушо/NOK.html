@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Anton (C)">
+	<meta name="description" content="Web Programming and Design">
+	<meta name="keywords" content="web, html, css, javascript">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JS Test</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="stylesheet" type="text/css" href="">
+	<script type="text/javascript" src=""></script>
+	<style>
+		/*  Saglabājiet jebkuras konteinera noteikto platumu un augstumu, 
+			izlaižot papildu izmērus apmalēm un polsterējumam   */
+		* {box-sizing: border-box;}
+		
+		/*  BODY tagu vispārīgais stils  */
+		body {
+			margin: 30px;
+			padding: 0;
+			font: 18px sans-serif;
+			background-image: url("images/javascript.png");
+			background-position: calc(55% + 100px) 30px;
+			background-repeat: no-repeat;
+			background-color: #fff;
+		}
+		
+		/*  Hipersaites  */
+		a {color: #2891f5; text-decoration: none;}
+		a:hover, a:focus {color: #b30000; text-decoration: none;}
+		
+		/*   Virsraksta dizains   */
+		h1, h2, h3 {
+			font-weight: normal;
+			text-shadow: 2px 2px #dadada;
+		}
+		h1 { color: #000000; font-size: 32px; }
+		h2 { color: #b30000; font-size: 24px; } 
+		h3 { color: #007acc; font-size: 20px; }
+
+		/*  Horizontālā līnija  */
+		hr {border: 1px solid #a2a2a2;}
+		
+		/*  Darba sadaļa  */
+		section {
+			padding: 20px;
+			width: 60%;
+			background-color: #f2f2f2;
+			border-radius: 8px;
+			box-shadow: 7px 7px 4px #6f6f6f inset;
+		}
+		
+		/*  Rezultātu diskusiju sadaļa  */
+		header {
+			width: 50%;
+			padding: 0px;
+		}
+		footer {
+			position: relative;
+			width: 100%;
+			padding: 0px;
+		}
+		textarea {
+			padding: 20px;
+			margin-right: 20px;
+			background: #292929;
+			font-size: 18px;
+			color: #00fd00;
+			border: 1px solid #00fd00;
+			border-radius: 8px;
+			box-shadow: 7px 9px 4px #6f6f6f;
+			outline: none;
+		}
+		
+		/*  Sadaļa ar atsaucēm  */
+		article {
+			position: relative;
+			width: 60%;
+			padding: 30px;
+			background-color: #292929;
+			color: #f8ead6;
+			border: 14px groove #c1824c;
+			border-radius: 8px;
+			column-count: 2;
+		}
+		/*  Hipersaites  */
+		article a {color: #00fd00; text-decoration: none;}
+		article a:hover, a:focus {color: #ff4242; text-decoration: none;}
+		
+		/*  Teksta lauka stils  */
+		input[type=text] {
+			width: 100%;
+			padding: 6px;
+			font: 18px Verdana;
+			border: 2px solid #838383;
+			border-radius: 8px;
+			box-shadow: 3px 3px 2px #6f6f6f inset;
+			outline: none;		/*  Noņemiet kontūras apmali ap pogu  */
+		}
+		
+		/*  Pogas stils  */
+		input[type=button] {
+			padding: 6px 15px;
+			width: 100%;
+			background-color: #2891f5;
+			font: 18px Verdana;
+			color: #fff;
+			box-shadow: 7px 9px 4px #6f6f6f;
+			cursor: pointer;
+			border-radius: 8px;
+			outline: none;		/*  Noņemiet kontūras apmali ap pogu  */
+		}
+		input[type=button]:hover {
+			transition: 0.2s;	/*  Palēniniet pārmaiņas  */
+		}
+		input[type=button]:active {
+			box-shadow: 4px 4px 2px #383838;	/*  Nospiediet efekta simulāciju  */
+		}
+		
+		/*  Pielāgojiet konteineru izmērus un fontu, 
+			kad pārlūka lielums tika mainīts  */
+		@media screen and (max-width: 900px) {
+			body {
+				font: 14px Arial;
+			}
+			textarea {
+				font: 14px Arial;
+			}
+		}
+	</style>
+</head>
+<body>
+	<br><hr><br>
+	
+	<!--  Darba sadaļa  -->
+	<h2>Sadaļa Darbam</h2>
+	<section>
+		<!--  Lauks ar datiem, kas jānodod JS funkcijai  -->
+		<label for="maniDati">Sākotnējie dati: </label>
+		<input type="text" id="maniDati1" placeholder="Ievadiet datus">
+		<br><br>
+		<input type="text" id="maniDati2" placeholder="Ievadiet datus">
+		<br><br>
+		<!--  Poga JS koda sākšanai  -->
+		<input type="button" onclick="manaFunkcija();" value="Aprēķināt">
+		<br><br>
+		<!--  Lauks ar resultātu  -->
+		<label for="mansRezultats">JS Rezultāts:&emsp;</label>
+		<textarea id="mansRezultats" placeholder="Rezultāts" rows="4" spellcheck="false" style="width: 100%; font-size: 22px; color: lime;"></textarea>
+		<br><br>
+		<!--  Poga, lai nodzēst visus laukus  -->
+		<input type="button" onclick="dzestVisu();" value="Dzēst" style="background-color: #b30000; color: #f8ead6;">
+	</section>
+
+<script>
+	function manaFunkcija() {
+		//  Iegūstiet datus no lauka
+		var perviy = Number(document.getElementById("maniDati1").value);
+		var vtoroy = Number(document.getElementById("maniDati2").value);
+		var ost = 0;
+		var mansRez = "";
+		var reiz = 0;
+		var atbelde = 0;
+		//  Pārbaude: nekas netika ievadīts
+		if (perviy == 0 || vtoroy == 0) {
+			document.getElementById("mansRezultats").style.color = "red";
+			document.getElementById("mansRezultats").value = "В одном из полей ничего не введено!";
+		} else if (isNaN(perviy) || isNaN(vtoroy)) {
+			document.getElementById("mansRezultats").style.color = "red";
+			document.getElementById("mansRezultats").value = "Введено неправильное данное!";
+		} else {
+			reiz = Math.abs((perviy * vtoroy));
+			if (perviy > vtoroy){
+				while ((perviy % vtoroy) > 0) {
+					ost = perviy % vtoroy;
+					perviy = vtoroy;
+					vtoroy = ost;
+				}
+				atbelde = reiz / vtoroy;
+			} else {
+				while ((vtoroy % perviy) > 0) {
+					ost = vtoroy % perviy;
+					vtoroy = perviy;
+					perviy = ost;
+				}
+				atbelde = reiz / perviy;
+			}
+			mansRez = "Наименьшее общее кратное - " + atbelde + "."
+			document.getElementById("mansRezultats").style.color = "lime";
+			document.getElementById("mansRezultats").value = mansRez;
+		}
+	}
+	
+	//  Funkcija visu lauku tīrīšanai
+	function dzestVisu() {
+		document.getElementById("maniDati1").value = "";
+		document.getElementById("maniDati2").value = "";
+		document.getElementById("mansRezultats").value = "";
+	}
+</script>
+</body>
+</html>
